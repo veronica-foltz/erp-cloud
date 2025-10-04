@@ -1,0 +1,17 @@
+.card { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:12px; margin:12px 0; }
+.form-grid { display:grid; grid-template-columns: 1fr 1fr 1fr auto 1fr auto; gap:8px; }
+.form-grid input[type="text"], .form-grid input[type="number"] { padding:8px; border:1px solid var(--border); border-radius:8px; }
+.form-grid .chk { display:flex; align-items:center; gap:8px; padding:0 6px; }
+.form-grid button { padding:8px 12px; border-radius:8px; border:1px solid var(--accent); background:var(--accent); color:white; cursor:pointer; }
+.form-grid button[disabled] { opacity:.5; cursor:not-allowed; }
+
+.table { width:100%; border-collapse:collapse; background:var(--card); border:1px solid var(--border); border-radius:12px; overflow:hidden; }
+.table th, .table td { padding:10px; border-bottom:1px solid var(--border); }
+.table thead th { background:var(--bg); text-align:left; }
+.right { text-align:right; }
+.center { text-align:center; }
+.link { background:transparent; border:none; color:var(--accent); cursor:pointer; padding:4px 8px; }
+.link.danger { color:#d64545; }
+.link.muted { color:var(--muted); }
+.dot { display:inline-block; width:10px; height:10px; border-radius:50%; background:#bbb; vertical-align:middle; }
+.dot.on { background:#27b36a; }

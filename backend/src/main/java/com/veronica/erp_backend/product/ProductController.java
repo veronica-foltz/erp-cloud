@@ -1,24 +1,32 @@
-package main.java.com.veronica.erp_backend.product;
+package com.veronica.erp_backend.product;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import jakarta.validation.Valid;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import java.net.URI;
 import java.util.List;
-import java.util.Map;
 
 @RestController
+@RequestMapping("/api/products")
 public class ProductController {
+    private final ProductService service;
+    public ProductController(ProductService service){ this.service = service; }
 
-    // quick probe: should return "products ok"
-    @GetMapping("/api/products/ping")
-    public String ping() {
-        return "products ok";
+    @GetMapping public List<Product> list(){ return service.list(); }
+
+    @GetMapping("/{id}") public Product get(@PathVariable Long id){ return service.get(id); }
+
+    @PostMapping
+    public ResponseEntity<Product> create(@Valid @RequestBody Product p){
+        Product saved = service.create(p);
+        return ResponseEntity.created(URI.create("/api/products/" + saved.getId())).body(saved);
     }
 
-    // simple demo list so we know the mapping works
-    @GetMapping("/api/products")
-    public List<Map<String, Object>> demo() {
-        return List.of(
-                Map.of("sku", "DEMO-1", "name", "Demo Item", "price", 1.23, "active", true, "stockQty", 5)
-        );
+    @PutMapping("/{id}") public Product update(@PathVariable Long id, @Valid @RequestBody Product p){
+        return service.update(id, p);
+    }
+
+    @DeleteMapping("/{id}") public ResponseEntity<Void> delete(@PathVariable Long id){
+        service.delete(id); return ResponseEntity.noContent().build();
     }
 }

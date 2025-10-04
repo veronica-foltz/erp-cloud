@@ -1,0 +1,56 @@
+<h2>Products</h2>
+
+<!-- Create form -->
+<form [formGroup]="form" (ngSubmit)="add()" class="card form-grid">
+  <input placeholder="SKU" formControlName="sku">
+  <input placeholder="Name" formControlName="name">
+  <input type="number" step="0.01" placeholder="Price" formControlName="price">
+  <label class="chk"><input type="checkbox" formControlName="active"> Active</label>
+  <input type="number" placeholder="Stock Qty" formControlName="stockQty">
+  <button type="submit" [disabled]="saving || form.invalid">Add product</button>
+</form>
+
+<div *ngIf="loading">Loading…</div>
+
+<table *ngIf="!loading && products.length" class="table">
+  <thead>
+    <tr>
+      <th>Id</th><th>SKU</th><th>Name</th><th>Price</th><th>Active</th><th>Stock</th><th class="right">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let p of products; trackBy: trackById">
+      <!-- normal view -->
+      <ng-container *ngIf="editingId !== p.id; else editRow">
+        <td>{{ p.id }}</td>
+        <td>{{ p.sku }}</td>
+        <td>{{ p.name }}</td>
+        <td>{{ p.price | currency }}</td>
+        <td><span [class.dot]="true" [class.on]="p.active"></span></td>
+        <td>{{ p.stockQty }}</td>
+        <td class="right">
+          <button class="link" (click)="startEdit(p)">Edit</button>
+          <button class="link danger" (click)="remove(p.id!)">Delete</button>
+        </td>
+      </ng-container>
+
+      <ng-template #editRow>
+  <!-- bind the row to the edit form -->
+  <ng-container [formGroup]="editForm">
+    <td>{{ p.id }}</td>
+    <td><input formControlName="sku"></td>
+    <td><input formControlName="name"></td>
+    <td><input type="number" step="0.01" formControlName="price"></td>
+    <td class="center"><input type="checkbox" formControlName="active"></td>
+    <td><input type="number" formControlName="stockQty"></td>
+    <td class="right">
+      <button class="link" (click)="saveEdit(p.id!)" [disabled]="editForm.invalid">Save</button>
+      <button class="link muted" (click)="cancelEdit()">Cancel</button>
+    </td>
+  </ng-container>
+</ng-template>
+    </tr>
+  </tbody>
+</table>
+
+<p *ngIf="!loading && !products.length">No products yet — add one above.</p>

@@ -1,4 +1,4 @@
-package main.java.com.veronica.erp_backend;
+package com.veronica.erp_backend;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

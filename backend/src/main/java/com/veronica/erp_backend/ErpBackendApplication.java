@@ -11,12 +11,12 @@ public class ErpBackendApplication {
         SpringApplication.run(ErpBackendApplication.class, args);
     }
 
-    // ---- TEMP: inline controller to prove mappings work ----
-    @RestController
-    static class InlineHealthController {
-        @GetMapping("/api/health")
-        public String health() {
-            return "ok";
-        }
-    }
+    // // ---- TEMP: inline controller to prove mappings work ----
+    // @RestController
+    // static class InlineHealthController {
+    //     @GetMapping("/api/health")
+    //     public String health() {
+    //         return "ok";
+    //     }
+    // }
 }
