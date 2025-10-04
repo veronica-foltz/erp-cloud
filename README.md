@@ -1,8 +1,14 @@
-# ERP Cloud (Mini-ERP)
+Orderly (Mini-ERP)
 
-Spring Boot + H2 (dev) backend for inventory/orders/invoices.
-- Run backend: `.\mvnw.cmd spring-boot:run` (Windows) or `./mvnw spring-boot:run` (Mac/Linux)
-- Health: `GET http://127.0.0.1:8080/api/health`
-- Products: `GET http://127.0.0.1:8080/api/products`
+A learning project that mirrors real Oracle-style workflows: Products → Orders → Invoices.  
+Backend: Spring Boot + H2. Frontend: Angular (standalone).
 
-Dev DB: in-memory H2 (no install). H2 console at `/h2-console` with JDBC URL `jdbc:h2:mem:erpdb`.
+Demo
+- Products list with create/edit/delete
+- Inline editing, validation, and clean UI
+- H2 console for quick DB inspection
+
+Stack
+- Java 17, Spring Boot (Web, JPA), H2
+- Angular 17+ (standalone components), Reactive Forms
+- REST JSON API, CORS/proxy for local dev
